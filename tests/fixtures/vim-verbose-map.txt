@@ -1,0 +1,13 @@
+n  <Space>ff   * :Files<CR>
+	Last set from ~/.vimrc line 12
+   <Space>w    * :w<CR>
+	Last set from ~/.vimrc line 13
+n  gx            <Plug>NetrwBrowseX
+	Last set from /usr/share/vim/vim90/plugin/netrwPlugin.vim line 84
+n  cs            <Plug>Csurround
+	Last set from ~/.vim/pack/plugins/start/vim-surround/plugin/surround.vim line 3
+n  q           *@:close<CR>
+	Last set from ~/.vimrc line 30
+
+i  jk          * <Esc>
+	Last set from ~/.vimrc line 20

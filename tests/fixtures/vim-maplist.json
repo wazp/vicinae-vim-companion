@@ -1,0 +1,69 @@
+{
+	"version": 901,
+	"leader": " ",
+	"localleader": null,
+	"myvimrc": "/home/user/.vimrc",
+	"vimruntime": "/usr/share/vim/vim91",
+	"maps": [
+		{
+			"lhs": "<Space>ff",
+			"rhs": ":Files<CR>",
+			"mode": "n",
+			"sid": 1,
+			"lnum": 12,
+			"buffer": 0,
+			"noremap": 1
+		},
+		{
+			"lhs": "<Space>w",
+			"rhs": ":w<CR>",
+			"mode": " ",
+			"sid": 1,
+			"lnum": 13,
+			"buffer": 0,
+			"noremap": 1
+		},
+		{
+			"lhs": "gx",
+			"rhs": "<Plug>NetrwBrowseX",
+			"mode": "n",
+			"sid": 30,
+			"lnum": 84,
+			"buffer": 0
+		},
+		{
+			"lhs": "<Plug>NetrwBrowseX",
+			"rhs": ":call netrw#BrowseX()<CR>",
+			"mode": "n",
+			"sid": 30,
+			"lnum": 85,
+			"buffer": 0
+		},
+		{
+			"lhs": "cs",
+			"rhs": "<Plug>Csurround",
+			"mode": "n",
+			"sid": 40,
+			"lnum": 3,
+			"buffer": 0
+		},
+		{
+			"lhs": "jk",
+			"rhs": "<Esc>",
+			"mode": "i",
+			"sid": 1,
+			"lnum": 20,
+			"buffer": 0,
+			"noremap": 1
+		}
+	],
+	"scripts": [
+		{ "sid": 1, "name": "/home/user/.vimrc" },
+		{ "sid": 30, "name": "/usr/share/vim/vim91/plugin/netrwPlugin.vim" },
+		{
+			"sid": 40,
+			"name": "/home/user/.vim/plugged/vim-surround/plugin/surround.vim"
+		}
+	],
+	"errors": []
+}
