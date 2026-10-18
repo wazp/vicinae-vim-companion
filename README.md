@@ -107,7 +107,7 @@ Attribution is based only on definition paths: Neovim's runtime, LazyVim, a plug
 - lazy.nvim creates stub mappings for lazy-loaded plugins' `keys`. These are active (pressing them loads the plugin) and are attributed to the plugin that declared them.
 - Spec keys that have no mapping in the session are listed as **declared**; keys with an `ft` are **conditional**; disabled plugins are skipped.
 - LSP keymaps (`gd`, `K`, `<leader>ca`, `<leader>cr`, ...) are read from LazyVim's `nvim-lspconfig` options (`servers["*"].keys` and per-server keys, or the pre-v15 API). They are always **conditional**, with the capability they need, because they only exist after a server attaches.
-- `<leader>ff` is shown as `<leader>ff  →  Space f f` using your actual leader. Space is never assumed.
+- `<leader>ff` is listed as `<leader>ff`; the detail view also shows the keys you actually type (`Space f f`) using your real leader. Space is never assumed.
 - If you override a LazyVim default, the mapping you see is the effective one, attributed to your config.
 
 ### Vim
