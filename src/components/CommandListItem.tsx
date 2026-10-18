@@ -2,13 +2,7 @@ import { ActionPanel, List } from "@vicinae/api";
 import type { CommandEntry } from "../types/commands";
 import { STATUS_LABELS } from "../types/commands";
 import { CommandActions } from "./CommandActions";
-import {
-	entryIcon,
-	keysLabel,
-	modesLabel,
-	modesShort,
-	sourceLabel,
-} from "./presentation";
+import { entryIcon, modesLabel, modesShort, sourceLabel } from "./presentation";
 
 export function CommandListItem({
 	entry,
@@ -33,7 +27,7 @@ export function CommandListItem({
 		<List.Item
 			id={entry.id}
 			title={entry.title}
-			subtitle={keysLabel(entry)}
+			subtitle={entry.keys}
 			icon={{
 				value: entryIcon(entry),
 				tooltip: entry.composed

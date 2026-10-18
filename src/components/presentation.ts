@@ -40,8 +40,3 @@ export function entryIcon(e: CommandEntry): {
 	if (e.composed) return { source: Icon.Wand, tintColor: Color.Magenta };
 	return STATUS_ICON[e.status];
 }
-
-/** Keys as shown in the list: symbolic keys plus the expanded form when they differ. */
-export function keysLabel(e: CommandEntry): string {
-	return e.keysDisplay ? `${e.keys}  →  ${e.keysDisplay}` : e.keys;
-}
