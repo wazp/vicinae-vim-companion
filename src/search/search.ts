@@ -2,7 +2,13 @@ import type { CommandEntry } from "../types/commands";
 import { normalizeKeys, parseKeyQuery, templateToRegExp } from "../utils/keys";
 import { compose } from "./compose";
 import { editDistance, typoBudget } from "./fuzzy";
-import { queryTerms, STOPWORDS, stem, tokenize } from "./normalize";
+import {
+	normalizeText,
+	queryTerms,
+	STOPWORDS,
+	stem,
+	tokenize,
+} from "./normalize";
 import { canonical, related, synonymVocabulary } from "./synonyms";
 
 export type MatchKind =
@@ -35,6 +41,8 @@ interface Indexed {
 	keysAlt?: string;
 	template?: RegExp;
 	title: string[];
+	/** Normalized title text, for "title starts with what was typed" matching. */
+	titleText: string;
 	aliases: string[][];
 	keywords: Set<string>;
 	description: Set<string>;
@@ -104,6 +112,7 @@ export class SearchIndex {
 				: undefined,
 			template: templateToRegExp(entry.keys),
 			title: textTerms(entry.title),
+			titleText: normalizeText(entry.title),
 			aliases: entry.aliases.map(textTerms).filter((a) => a.length > 0),
 			keywords: new Set(keywordTerms(entry.keywords)),
 			description: new Set(textTerms(entry.description)),
@@ -160,7 +169,10 @@ export class SearchIndex {
 			let n = 0;
 			for (const [word, wordStem] of this.rawVocab) {
 				if (word.length > raw.length && word.startsWith(raw)) {
-					put(canonical(wordStem), known ? 0.6 : 0.85);
+					// Prefer completions that are closer to what was typed: "ch" leans
+					// toward "change" over "character".
+					const closeness = 0.85 + 0.15 * (raw.length / word.length);
+					put(canonical(wordStem), (known ? 0.6 : 0.85) * closeness);
 					if (++n >= 40) break;
 				}
 			}
@@ -258,6 +270,7 @@ export class SearchIndex {
 		);
 		const qKeys = parseKeyQuery(q);
 		const looksLikeKeys = !/\s/.test(q) && q.length <= 12;
+		const qText = normalizeText(q);
 
 		const results = new Map<Indexed | CommandEntry, SearchResult>();
 
@@ -301,6 +314,9 @@ export class SearchIndex {
 						220 * title.score;
 					if (title.exact) tScore += 320;
 					else if (alias.exact) tScore += 260;
+					// Launcher-style: the title begins with exactly what was typed.
+					else if (qText.length >= 2 && item.titleText.startsWith(qText))
+						tScore += 180;
 					match = title.exact
 						? "title"
 						: alias.exact

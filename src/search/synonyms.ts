@@ -94,7 +94,7 @@ const RELATED: Array<[string, string, number]> = [
 	["again", "repeat", 0.8],
 	["last", "previous", 0.5],
 	["recent", "last", 0.8],
-	["inner", "inside", 1],
+	["inner", "inside", 0.9],
 	["within", "inside", 0.9],
 	["between", "inside", 0.9],
 	["contents", "inside", 0.7],

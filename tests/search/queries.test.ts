@@ -97,6 +97,12 @@ const CASES: Array<[string, string, number?]> = [
 	["set mark", "m{a-z}"],
 	["reindent file", "gg=G"],
 	["convert tabs to spaces", ":retab"],
+	// Partially typed queries
+	["change inner", "ciw"],
+	["ch", "cc", 3],
+	["chan", "cc", 3],
+	["delete ch", "x"],
+	["sel", "ggVG", 3],
 	// Typos
 	["delte line", "dd"],
 	["coppy line", "yy"],
@@ -173,6 +179,27 @@ describe("search behavior", () => {
 			.filter((r) => r.entry.keys === "u");
 		const modes = results.map((r) => r.entry.modes.join(""));
 		assert.ok(modes.includes("n") && modes.includes("x"), `modes: ${modes}`);
+	});
+
+	it("prefers titles that start with what was typed", () => {
+		const top = index.search("ch", { limit: 5 }).map((r) => r.entry.title);
+		assert.ok(
+			top.every((t) => !/^Delete/.test(t)),
+			`"ch" should not surface Delete... titles: ${top.join(", ")}`,
+		);
+		assert.ok(
+			top.filter((t) => t.startsWith("Change")).length >= 3,
+			top.join(", "),
+		);
+	});
+
+	it("ranks the literal title above inner/inside near-synonyms", () => {
+		const [first, ...rest] = index.search("change inner", { limit: 5 });
+		assert.equal(first.entry.keys, "ciw");
+		assert.ok(
+			rest.some((r) => r.entry.keys === "ci("),
+			"inside objects still listed",
+		);
 	});
 
 	it("completes partially typed words", () => {
