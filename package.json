@@ -2,8 +2,9 @@
   "$schema": "https://raw.githubusercontent.com/vicinaehq/vicinae/refs/heads/main/extra/schemas/extension.json",
   "name": "vim-companion",
   "title": "Vim Companion",
-  "description": "A fast, searchable reference for Vim commands, Neovim keymaps, and LazyVim shortcuts. Find the right keystrokes by describing what you want to do, explore commands by category, and discover shortcuts from your own Neovim configuration.",
-  "categories": [],
+  "description": "Search Vim commands and your Neovim keymaps using plain English.",
+  "categories": ["Developer Tools", "Documentation"],
+  "keywords": ["vim", "neovim", "nvim", "lazyvim", "keymaps", "shortcuts", "cheatsheet"],
   "license": "MIT",
   "author": "wazp",
   "contributors": [],
@@ -11,24 +12,145 @@
   "icon": "extension_icon.png",
   "commands": [
     {
-      "name": "vim-companion",
-      "title": "Vim Companion",
+      "name": "search-commands",
+      "title": "Search Vim Commands",
       "description": "Find Vim commands and Neovim shortcuts by describing what you want to do.",
+      "mode": "view"
+    },
+    {
+      "name": "browse-keymaps",
+      "title": "Browse Keymaps",
+      "description": "Explore the mappings discovered from your Vim and Neovim configuration.",
+      "mode": "view"
+    },
+    {
+      "name": "refresh-keymaps",
+      "title": "Refresh Keymaps",
+      "description": "Re-detect editors and re-discover configured keymaps.",
+      "mode": "no-view"
+    },
+    {
+      "name": "environment-diagnostics",
+      "title": "Environment Diagnostics",
+      "description": "Show detected editors, configuration paths, leader keys, and discovery status.",
       "mode": "view"
     }
   ],
-  "preferences": [],
+  "preferences": [
+    {
+      "name": "preferredEditor",
+      "title": "Preferred Editor",
+      "description": "Which editor's mappings to show. Auto prefers Neovim when both are installed.",
+      "type": "dropdown",
+      "required": false,
+      "default": "auto",
+      "data": [
+        { "title": "Auto", "value": "auto" },
+        { "title": "Neovim", "value": "neovim" },
+        { "title": "Vim", "value": "vim" }
+      ]
+    },
+    {
+      "name": "runtimeDiscovery",
+      "title": "Runtime Discovery",
+      "description": "How keymaps are discovered. Loading your configuration runs its startup code (plugins, autocommands) in a headless editor.",
+      "type": "dropdown",
+      "required": false,
+      "default": "config",
+      "data": [
+        { "title": "Load my configuration (runs startup code)", "value": "config" },
+        { "title": "Safe: editor defaults only (no user config)", "value": "safe" },
+        { "title": "Off: built-in reference only", "value": "off" }
+      ]
+    },
+    {
+      "name": "vimPath",
+      "title": "Vim Executable",
+      "description": "Absolute path to vim. Leave empty to search PATH.",
+      "type": "textfield",
+      "required": false,
+      "placeholder": "Auto (search PATH)"
+    },
+    {
+      "name": "nvimPath",
+      "title": "Neovim Executable",
+      "description": "Absolute path to nvim. Leave empty to search PATH.",
+      "type": "textfield",
+      "required": false,
+      "placeholder": "Auto (search PATH)"
+    },
+    {
+      "name": "nvimAppName",
+      "title": "Neovim Configuration",
+      "description": "NVIM_APPNAME profile (e.g. lazyvim) or an absolute config directory. Leave empty to use the environment default.",
+      "type": "textfield",
+      "required": false,
+      "placeholder": "Auto"
+    },
+    {
+      "name": "includeBuiltins",
+      "title": "Sources",
+      "description": "Search the curated Vim command reference.",
+      "type": "checkbox",
+      "label": "Include built-in commands",
+      "required": false,
+      "default": true
+    },
+    {
+      "name": "includeCustom",
+      "title": "",
+      "description": "Search mappings discovered from your editor configuration.",
+      "type": "checkbox",
+      "label": "Include custom keymaps",
+      "required": false,
+      "default": true
+    },
+    {
+      "name": "includePlugins",
+      "title": "",
+      "description": "Search mappings provided or declared by plugins.",
+      "type": "checkbox",
+      "label": "Include plugin mappings",
+      "required": false,
+      "default": true
+    },
+    {
+      "name": "leaderOverride",
+      "title": "Leader Key",
+      "description": "Display override for <leader>, e.g. Space or ,. Leave empty to use the detected value.",
+      "type": "textfield",
+      "required": false,
+      "placeholder": "Auto"
+    },
+    {
+      "name": "resultLimit",
+      "title": "Search Result Limit",
+      "description": "Maximum number of results shown while searching.",
+      "type": "dropdown",
+      "required": false,
+      "default": "50",
+      "data": [
+        { "title": "25", "value": "25" },
+        { "title": "50", "value": "50" },
+        { "title": "100", "value": "100" },
+        { "title": "200", "value": "200" }
+      ]
+    }
+  ],
   "scripts": {
     "build": "vici build",
     "dev": "vici develop",
-    "format": "biome format --write src",
-    "lint": "vici lint"
+    "format": "biome format --write src tests",
+    "lint": "vici lint",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tests/tsconfig.json",
+    "test": "node --import tsx --test \"tests/**/*.test.ts\""
   },
   "dependencies": {
     "@vicinae/api": "^0.29.1"
   },
   "devDependencies": {
-    "typescript": "^5.9.2",
-    "@biomejs/biome": "2.3.2"
+    "@biomejs/biome": "2.3.2",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.2"
   }
 }
