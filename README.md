@@ -6,10 +6,7 @@ Vim Companion is a [Vicinae](https://github.com/vicinaehq/vicinae) extension: a 
 
 No AI, no network, no API keys.
 
-<!-- Screenshots: replace with real captures before publishing -->
-| Search | Detail | Browse keymaps |
-|---|---|---|
-| `assets/screenshots/search.png` | `assets/screenshots/detail.png` | `assets/screenshots/browse.png` |
+![Searching in plain English, opening details, and finding LazyVim mappings](media/search.gif)
 
 ## Commands
 
@@ -22,7 +19,35 @@ No AI, no network, no API keys.
 
 Actions on every result: view details, copy keystrokes, copy the leader-expanded keys, copy the explanation, copy an example, refresh keymaps, open diagnostics. Vim Companion never sends keystrokes to an editor.
 
-## Three sources of information
+| Plain-English search | Your own keymaps |
+|---|---|
+| ![delete inside quotes finds di"](media/plain-english.png) | ![find files finds Snacks picker mappings](media/custom-keymap.png) |
+| **Composed commands, explained** | **Browse by plugin** |
+| ![va{ broken down into v and a{](media/composed-detail.png) | ![Bufferline mappings in Browse Keymaps](media/keymaps.png) |
+
+## Reading the results
+
+Each row shows a title and its keys on the left, and two pieces of information on the right.
+
+**Modes.** The letter badge lists the modes the command works in, using Vim's own mode letters (`:help map-modes`). Hover the badge for the full names.
+
+| Letter | Mode | When |
+|---|---|---|
+| `n` | Normal | The default mode, for moving and running commands |
+| `x` | Visual | While text is selected (`v`, `V`, `<C-v>`) |
+| `o` | Operator-pending | After an operator such as `d`, `c` or `y`, waiting for a motion or text object |
+| `i` | Insert | While typing text |
+| `c` | Command-line | While typing a `:` command or a `/` search |
+| `t` | Terminal | Inside a `:terminal` buffer |
+| `s` | Select | Rarely used; shown only when a mapping is Select-only |
+
+Visual is shown as `x` rather than `v` because, in Vim's mapping terms, `v` means Visual and Select together. Mappings that cover both are shown as `x`. A motion such as `^` shows `n x o`: you can move with it, extend a selection with it, and use it after an operator (`d^`).
+
+**Source.** The label on the right says where the entry came from: "Vim built-in" or "Neovim built-in" for the curated reference, "Composed" for generated operator and text-object commands, and for discovered mappings the owner: "LazyVim", "User config", or a plugin such as "Snacks" or "Telescope".
+
+**Leader keys.** Lists show `<leader>ff`. The detail view also shows the keys you actually type with your configured leader, e.g. `Space f f`. You can search either way: `<leader>ff`, `space f f`, or `<space>ff`.
+
+### Sources and status
 
 Vim Companion keeps these apart, and every result says which one it came from:
 
@@ -30,24 +55,29 @@ Vim Companion keeps these apart, and every result says which one it came from:
 2. **Runtime mappings.** What your Vim or Neovim actually has mapped after startup, read from the running editor.
 3. **LazyVim and plugin mappings.** Mappings attributed to LazyVim or a specific plugin, plus keys that plugins declare but that only appear later (on first use, for a filetype, or when an LSP server attaches).
 
-Each result carries a status:
+The icon on each row shows its status:
 
-| Status | Meaning |
-|---|---|
-| Built-in reference | Documented behavior, not read from your editor |
-| Active global mapping | Observed as a global mapping in your editor |
-| Buffer-local mapping | Observed only in the buffer that was inspected |
-| Plugin-declared mapping | Declared in a lazy.nvim spec, but no mapping was observed |
-| Conditional mapping | Only exists in some buffers (a filetype, or an attached LSP server) |
-| Overridden | A built-in your configuration remaps in at least one mode |
+| Icon | Status | Meaning |
+|---|---|---|
+| Book | Built-in reference | Documented behavior, not read from your editor |
+| Green check | Active global mapping | Observed as a global mapping in your editor |
+| Blue dot | Buffer-local mapping | Observed only in the buffer that was inspected |
+| Purple plug | Plugin-declared mapping | Declared in a lazy.nvim spec, but no mapping was observed |
+| Orange question mark | Conditional mapping | Only exists in some buffers (a filetype, or an attached LSP server) |
+| Yellow warning | Overridden | A built-in your configuration remaps in at least one mode; the detail view says what it is mapped to instead |
+| Magic wand | Composed | Generated from Vim's operator and text-object grammar |
+
+![go to definition shows the conditional LSP mapping above the built-in gd](media/conditional.png)
 
 ## Installation
 
-Requires Vicinae. Building and testing require Node.js 22+.
+From the Vicinae store, once listed: search for **Vim Companion** in Vicinae's extension store.
+
+From source (requires Node.js 22+):
 
 ```bash
-git clone <this repo> vim-companion
-cd vim-companion
+git clone https://github.com/wazp/vicinae-vim-companion.git
+cd vicinae-vim-companion
 npm install
 npm run build   # builds and installs into Vicinae's extension directory
 ```
@@ -63,7 +93,7 @@ For development with live reload: `npm run dev`.
 | Neovim 0.9+ | Yes | Yes |
 | LazyVim (on Neovim) | Yes | Yes, with LazyVim attribution, extras, and LSP keymaps |
 
-Linux is the primary target. Nothing in the code is Linux-only: macOS should work (Homebrew paths are searched), but it is untested. Windows is not supported for runtime discovery.
+Vim Companion is published for Linux. Nothing in the code is Linux-only and Homebrew paths are searched, so macOS may work, but it is untested and not declared as supported. Windows is not supported for runtime discovery.
 
 ## Preferences
 
@@ -156,6 +186,8 @@ This is keyword matching with curated phrasing, not language understanding. It w
 
 Open **Environment Diagnostics** first: it shows what was detected, where, and the editor's own error output.
 
+![Environment Diagnostics report](media/environment.gif)
+
 | Symptom | Fix |
 |---|---|
 | "No Vim or Neovim installation found" | Set the executable path in preferences. Launchers can have a smaller PATH than your shell. |
@@ -191,6 +223,7 @@ src/
   types/, utils/     shared model, settings, key notation, paths, subprocess
 tests/
   search/, data/, utils/, discovery/, services/, fixtures/
+media/               README screenshots and GIFs (kept out of assets/ so they are not bundled)
 ```
 
 Vicinae requires command entry points at `src/<command-name>.tsx`, so commands live at the top of `src/` rather than in a `commands/` folder.
@@ -201,7 +234,7 @@ Adding reference entries: add to the relevant file in `src/data/vim/`, give it p
 
 - Runtime discovery is a startup snapshot (see above).
 - Vim runtime discovery is covered by fixture and pipeline tests but has not been run against a real Vim installation by the author.
-- macOS is untested; Windows runtime discovery is not supported.
+- Published for Linux only. macOS is untested; Windows runtime discovery is not supported.
 - The reference database is English only.
 - Composed commands cover operator + text object grammar only. Other operations come from the curated reference.
 
