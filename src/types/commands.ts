@@ -88,6 +88,8 @@ export interface CommandEntry {
   keys: string;
   /** Leader-expanded display form, e.g. `Space f f`. Only set when it differs from `keys`. */
   keysDisplay?: string;
+  /** Keys with <leader> expanded to the real key, e.g. `<Space>ff`. Runtime mappings only. */
+  keysExpanded?: string;
   modes: Mode[];
   category: Category;
   source: Source;

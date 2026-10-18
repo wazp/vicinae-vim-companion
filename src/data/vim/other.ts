@@ -371,7 +371,7 @@ export const files = section("Files", ["n"], [
     title: "Find file in path",
     desc: "Search 'path' for a file by name and edit it. With set path+=** it searches the whole project.",
     kw: ["find", "file", "open", "search", "name", "path", "project"],
-    aliases: ["find file by name", "search files by name", "open file by name"],
+    aliases: ["find file by name", "search files by name", "open file by name", "find files", "find file"],
     notes: "Plugins such as Telescope, fzf-lua or Snacks picker provide fuzzy file finding; see your discovered keymaps.",
   },
   {

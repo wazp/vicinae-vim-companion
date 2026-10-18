@@ -7,7 +7,7 @@ export const searchReplace = section("Search & Replace", ["n"], [
     desc: "Search forward for a pattern (a regular expression). Press Enter to jump to the first match.",
     modes: ["n", "x", "o"],
     kw: ["search", "find", "forward", "pattern", "regex", "slash"],
-    aliases: ["search in file", "find text", "search forward", "find in buffer"],
+    aliases: ["search in current file", "find text", "search forward", "search buffer"],
     ex: ["/TODO finds the next TODO", "/\\<id\\> finds id as a whole word"],
   },
   {
@@ -152,7 +152,7 @@ export const searchReplace = section("Search & Replace", ["n"], [
     title: "Search across files",
     desc: "Search for a pattern in multiple files with Vim's built-in grep and load the results into the quickfix list. Open the list with :copen.",
     kw: ["grep", "search", "project", "files", "multiple", "workspace", "vimgrep", "quickfix"],
-    aliases: ["search project", "search in all files", "find in files", "grep project", "search across files"],
+    aliases: ["search project", "search text across files", "grep project", "search across files"],
     ex: [":vimgrep /TODO/ **/*.ts", ":vimgrep /useState/j src/** (j: do not jump to the first match)"],
     notes: ":grep uses an external program ('grepprg', e.g. rg) and is much faster on large projects.",
   },

@@ -389,7 +389,7 @@ export const insertMode = section("Insert Mode", ["n"], [
     title: "Append at end of line",
     desc: "Enter Insert mode at the end of the line.",
     kw: ["append", "end", "line", "insert"],
-    aliases: ["append to end of line", "add to end of line", "type at end of line"],
+    aliases: ["append to end of line", "add to end of line", "type at end of line", "insert at end of line"],
     ex: ["A; appends a semicolon"],
   },
   {
