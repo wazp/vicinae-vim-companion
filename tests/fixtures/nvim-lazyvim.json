@@ -1,0 +1,278 @@
+{
+	"version": "0.11.5",
+	"leader": " ",
+	"localleader": "\\",
+	"config": "/home/user/.config/nvim",
+	"vimruntime": "/usr/share/nvim/runtime",
+	"instrumented": true,
+	"errors": [],
+	"maps": [
+		{
+			"mode": "n",
+			"lhs": "Y",
+			"norm": "Y",
+			"match": "Y",
+			"rhs": "y$",
+			"desc": ":help Y-default",
+			"sid": -8,
+			"buffer": false
+		},
+		{
+			"mode": "n",
+			"lhs": "<C-W><C-D>",
+			"norm": "<C-W><C-D>",
+			"match": "<C-W><C-D>",
+			"rhs": "<C-W>d",
+			"desc": "Show diagnostics under the cursor",
+			"sid": -8,
+			"buffer": false
+		},
+		{
+			"mode": "n",
+			"lhs": "gcc",
+			"norm": "gcc",
+			"match": "gcc",
+			"desc": "Toggle comment line",
+			"callback": true,
+			"sid": -8,
+			"buffer": false
+		},
+		{
+			"mode": "n",
+			"lhs": "%",
+			"norm": "%",
+			"match": "%",
+			"rhs": "<Plug>(MatchitNormalForward)",
+			"sid": 8,
+			"origin": "/usr/share/nvim/runtime/pack/dist/opt/matchit/plugin/matchit.vim:70",
+			"buffer": false
+		},
+		{
+			"mode": "n",
+			"lhs": "<C-J>",
+			"norm": "<C-J>",
+			"match": "<NL>",
+			"rhs": "<C-W>j",
+			"desc": "Go to Lower Window",
+			"sid": 3,
+			"origin": "/home/user/.local/share/nvim/lazy/LazyVim/lua/lazyvim/config/keymaps.lua:15",
+			"buffer": false
+		},
+		{
+			"mode": "n",
+			"lhs": "<C-S>",
+			"norm": "<C-S>",
+			"match": "<C-S>",
+			"rhs": "<Cmd>w<CR><Esc>",
+			"desc": "Save File",
+			"origin": "/home/user/.local/share/nvim/lazy/LazyVim/lua/lazyvim/config/keymaps.lua:78",
+			"buffer": false
+		},
+		{
+			"mode": "i",
+			"lhs": "<C-S>",
+			"norm": "<C-S>",
+			"match": "<C-S>",
+			"rhs": "<Cmd>w<CR><Esc>",
+			"desc": "Save File",
+			"origin": "/home/user/.local/share/nvim/lazy/LazyVim/lua/lazyvim/config/keymaps.lua:78",
+			"buffer": false
+		},
+		{
+			"mode": "x",
+			"lhs": "<C-S>",
+			"norm": "<C-S>",
+			"match": "<C-S>",
+			"rhs": "<Cmd>w<CR><Esc>",
+			"desc": "Save File",
+			"origin": "/home/user/.local/share/nvim/lazy/LazyVim/lua/lazyvim/config/keymaps.lua:78",
+			"buffer": false
+		},
+		{
+			"mode": "n",
+			"lhs": " ff",
+			"norm": "<Space>ff",
+			"match": "<Space>ff",
+			"desc": "Find Files (Root Dir)",
+			"callback": true,
+			"origin": "/home/user/.local/share/nvim/lazy/lazy.nvim/lua/lazy/core/loader.lua:342",
+			"via_lazy": true,
+			"buffer": false
+		},
+		{
+			"mode": "n",
+			"lhs": "s",
+			"norm": "s",
+			"match": "s",
+			"desc": "Flash",
+			"callback": true,
+			"origin": "/home/user/.local/share/nvim/lazy/lazy.nvim/lua/lazy/core/util.lua:135",
+			"via_lazy": true,
+			"buffer": false
+		},
+		{
+			"mode": "x",
+			"lhs": "s",
+			"norm": "s",
+			"match": "s",
+			"desc": "Flash",
+			"callback": true,
+			"origin": "/home/user/.local/share/nvim/lazy/lazy.nvim/lua/lazy/core/util.lua:135",
+			"via_lazy": true,
+			"buffer": false
+		},
+		{
+			"mode": "o",
+			"lhs": "s",
+			"norm": "s",
+			"match": "s",
+			"desc": "Flash",
+			"callback": true,
+			"origin": "/home/user/.local/share/nvim/lazy/lazy.nvim/lua/lazy/core/util.lua:135",
+			"via_lazy": true,
+			"buffer": false
+		},
+		{
+			"mode": "n",
+			"lhs": " gs",
+			"norm": "<Space>gs",
+			"match": "<Space>gs",
+			"desc": "git status",
+			"callback": true,
+			"origin": "/home/user/.config/nvim/lua/config/keymaps.lua:4",
+			"buffer": false
+		},
+		{
+			"mode": "n",
+			"lhs": ",x",
+			"norm": ",x",
+			"match": ",x",
+			"rhs": ":!chmod +x %<CR>",
+			"origin": "/home/user/.config/nvim/lua/config/keymaps.lua:7",
+			"buffer": false
+		},
+		{
+			"mode": "n",
+			"lhs": " wk",
+			"norm": "<Space>wk",
+			"match": "<Space>wk",
+			"desc": "which_key_ignore",
+			"callback": true,
+			"buffer": false
+		},
+		{
+			"mode": "n",
+			"lhs": "<Plug>(something)",
+			"norm": "<Plug>(something)",
+			"match": "<Plug>(something)",
+			"rhs": ":echo<CR>",
+			"buffer": false
+		},
+		{
+			"mode": "n",
+			"lhs": "q",
+			"norm": "q",
+			"match": "q",
+			"rhs": "<Cmd>close<CR>",
+			"desc": "Close window",
+			"origin": "/home/user/.config/nvim/lua/config/autocmds.lua:20",
+			"buffer": true
+		}
+	],
+	"lazy": {
+		"root": "/home/user/.local/share/nvim/lazy",
+		"plugins": [
+			{
+				"name": "snacks.nvim",
+				"loaded": true,
+				"keys": [
+					{
+						"lhs": "<leader>ff",
+						"match": "<Space>ff",
+						"modes": ["n"],
+						"desc": "Find Files (Root Dir)"
+					}
+				]
+			},
+			{
+				"name": "flash.nvim",
+				"loaded": false,
+				"keys": [
+					{
+						"lhs": "s",
+						"match": "s",
+						"modes": ["n", "x", "o"],
+						"desc": "Flash"
+					}
+				]
+			},
+			{
+				"name": "markdown-preview.nvim",
+				"loaded": false,
+				"keys": [
+					{
+						"lhs": "<leader>cp",
+						"match": "<Space>cp",
+						"modes": ["n"],
+						"desc": "Markdown Preview",
+						"ft": "markdown"
+					}
+				]
+			},
+			{
+				"name": "neo-tree.nvim",
+				"loaded": false,
+				"keys": [
+					{
+						"lhs": "<leader>e",
+						"match": "<Space>e",
+						"modes": ["n"],
+						"desc": "Explorer NeoTree"
+					}
+				]
+			},
+			{
+				"name": "disabled.nvim",
+				"loaded": false,
+				"keys": [
+					{
+						"lhs": "<leader>zz",
+						"match": "<Space>zz",
+						"modes": ["n"],
+						"desc": "Never shown"
+					}
+				]
+			}
+		],
+		"disabled": ["disabled.nvim"]
+	},
+	"lazyvim": {
+		"version": "15.13.0",
+		"extras": [
+			"lazyvim.plugins.extras.lang.typescript",
+			"lazyvim.plugins.extras.editor.snacks_picker"
+		],
+		"lsp_keys": [
+			{
+				"lhs": "gd",
+				"modes": ["n"],
+				"desc": "Goto Definition",
+				"has": ["definition"],
+				"server": "*"
+			},
+			{
+				"lhs": "<leader>cr",
+				"modes": ["n"],
+				"desc": "Rename",
+				"has": ["rename"],
+				"server": "*"
+			},
+			{
+				"lhs": "<leader>co",
+				"modes": ["n"],
+				"desc": "Organize Imports",
+				"server": "vtsls"
+			}
+		]
+	}
+}

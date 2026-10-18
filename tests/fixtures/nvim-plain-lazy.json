@@ -1,0 +1,44 @@
+{
+	"version": "0.10.2",
+	"leader": ",",
+	"config": "/home/user/.config/nvim",
+	"vimruntime": "/usr/share/nvim/runtime",
+	"instrumented": true,
+	"maps": [
+		{
+			"mode": "n",
+			"lhs": ",f",
+			"norm": ",f",
+			"match": ",f",
+			"desc": "Telescope find files",
+			"callback": true,
+			"origin": "/home/user/.local/share/nvim/lazy/lazy.nvim/lua/lazy/core/loader.lua:342",
+			"via_lazy": true
+		},
+		{
+			"mode": "n",
+			"lhs": ",w",
+			"norm": ",w",
+			"match": ",w",
+			"rhs": "<Cmd>w<CR>",
+			"origin": "/home/user/.config/nvim/init.lua:12"
+		}
+	],
+	"lazy": {
+		"root": "/home/user/.local/share/nvim/lazy",
+		"plugins": [
+			{
+				"name": "telescope.nvim",
+				"loaded": false,
+				"keys": [
+					{
+						"lhs": "<leader>f",
+						"match": ",f",
+						"modes": ["n"],
+						"desc": "Telescope find files"
+					}
+				]
+			}
+		]
+	}
+}
