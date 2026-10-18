@@ -1,4 +1,3 @@
-import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import {
 	type Env,
@@ -128,22 +127,6 @@ export async function neovimConfigInfo(
 		exists: await exists(resolved.configDir),
 		lazyvimJson: await exists(join(resolved.configDir, "lazyvim.json")),
 	};
-}
-
-/** Read the extras recorded in lazyvim.json, if present. Static evidence only. */
-export async function readLazyvimJsonExtras(
-	configDir: string,
-): Promise<string[]> {
-	try {
-		const data = JSON.parse(
-			await readFile(join(configDir, "lazyvim.json"), "utf8"),
-		) as { extras?: unknown };
-		return Array.isArray(data.extras)
-			? data.extras.filter((e): e is string => typeof e === "string")
-			: [];
-	} catch {
-		return [];
-	}
 }
 
 /** Detect installed editors and their configuration. Never throws. */

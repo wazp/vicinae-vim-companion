@@ -6,7 +6,6 @@ import {
 	detectEnvironment,
 	parseNeovimVersion,
 	parseVimVersion,
-	readLazyvimJsonExtras,
 } from "../../src/discovery/environment";
 import { findExecutable, resolveNvimConfig } from "../../src/utils/paths";
 import { fakeExecutable, tempDir } from "../helpers";
@@ -142,13 +141,5 @@ describe("environment detection", { skip: skipOnWindows }, () => {
 		});
 		// extra bin dirs could contain a real editor on the test machine; only assert it does not throw
 		assert.ok(Array.isArray(info.warnings));
-	});
-
-	it("reads LazyVim extras from lazyvim.json", async () => {
-		assert.deepEqual(
-			await readLazyvimJsonExtras(join(home, ".config", "nvim")),
-			["lazyvim.plugins.extras.lang.go"],
-		);
-		assert.deepEqual(await readLazyvimJsonExtras(join(home, "missing")), []);
 	});
 });
